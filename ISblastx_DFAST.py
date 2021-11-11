@@ -155,13 +155,14 @@ def blastx(dir_in = None,
            threshold = None,
            evalue = None):
     
-    if 'res_blastx' not in os.listdir(path='./'):
-        os.system('mkdir res_blastx')
+    #assert os.path.isfile(''), "specify the path to your nr database"
+    if 'res_ISblastx' not in os.listdir(path='./'):
+        os.system('mkdir res_ISblastx')
 
     for fasta_path in tqdm(os.listdir(path=dir_in)):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) > threshold:
-            os.system(f"blastx -query ./each_IS/{fasta_path} -out ./res_blastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}")
+            os.system(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}")
         else:
             pass
 
