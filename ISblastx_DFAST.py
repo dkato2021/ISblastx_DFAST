@@ -11,19 +11,19 @@ def get_args():
     parser.add_argument('-f' , '--features', required=True,
                         help='path to features.tsv from DFAST') 
     
-    parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
-                       help='nr database')
-    parser.add_argument('-t' , '--num_threads', type=int, default=3,
-                       help='num_threads',) 
-    parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
-                       help='num_descriptions')
-    
     parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, 
                        help='specify the mode of this program',)
     parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
                        help='evalue')
     parser.add_argument('-th', '--threshold', type=int, default=300, 
                        help='threshold')
+    
+    parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
+                       help='nr database')
+    parser.add_argument('-t' , '--num_threads', type=int, default=3,
+                       help='num_threads',) 
+    parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
+                       help='num_descriptions')
     
     parser.add_argument('--Without_blast', type=bool, default=False, choices=[True, False],
                         help='True or False')
@@ -199,6 +199,7 @@ def main():
                    db = get_args().DataBase, 
                    threshold = 300,
                    evalue =.0001 )
+            
         elif get_args().mode == "loose":
             blastx(dir_in = './each_IS/',
                    num_threads = get_args().num_threads,
