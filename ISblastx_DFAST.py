@@ -182,7 +182,7 @@ def main():
                num_threads = get_args().num_threads,
                num_descriptions= get_args().num_descriptions,
                db = get_args().DataBase, 
-               threshold =get_args().threshold
+               threshold =get_args().threshold,
                evalue =get_args().evalue )
 
 if __name__ == "__main__":
