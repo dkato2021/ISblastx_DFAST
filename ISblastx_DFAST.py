@@ -1,4 +1,4 @@
-import os, argparse
+import sys, os, argparse
 from tqdm import tqdm
 import pandas as pd
 from Bio import SeqIO
@@ -46,7 +46,7 @@ def get_edited_features(path_to_features = None):
     return  pd.concat([_df.sequence, cds], axis = 1)
 
 class MyGetIS(object):
-    def __init__(self, df=None, genome = None):
+    def __init__(self, df = None, genome = None):
         self.df        = df 
         self.genome    = genome
         self.counter   = 0
@@ -141,6 +141,8 @@ class MyGetIS(object):
                                                          id_out = self.id_out, 
                                                          seq_out = self.seq_out, 
                                                          counter = self.counter)
+            else:
+                print('ERROR!') ;sys.exit()
         return self.id_out, self.seq_out
     
     def main(self, id_out, seq_out):
