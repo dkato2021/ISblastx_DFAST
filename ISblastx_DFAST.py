@@ -90,19 +90,20 @@ class MyGetIS(object):
     def get_IS(self):
         for i in tqdm(range(len(self.df))):
             if i == 0:
-                df_i = self.df.loc[i, ]
-                genome_i = [genome_i for genome_i in self.genome if genome_i.id==df_i.sequence][0]
+                df_i = self.df.loc[i, ] ;tmpi = df_i.sequence
+                
+                genome_i = [genome_i for genome_i in self.genome if genome_i.id==tmpi][0]
                 self.counter = MyGetIS.get_1st_interval(df_i, genome_i, 
                                                         id_out = self.id_out, 
                                                         seq_out = self.seq_out, 
                                                         counter = self.counter)
 
             elif MyGetIS.inside(i, len(self.df)):
-                df_h = self.df.loc[i-1, ]
-                df_i = self.df.loc[i, ]
+                df_h = self.df.loc[i-1, ] ;tmph = df_h.sequence
+                df_i = self.df.loc[i, ] ;tmpi = df_i.sequence
 
-                genome_h = [genome_i for genome_i in self.genome if genome_i.id==df_h.sequence][0]
-                genome_i = [genome_i for genome_i in self.genome if genome_i.id==df_i.sequence][0]
+                genome_h = [genome_i for genome_i in self.genome if genome_i.id==tmph][0]
+                genome_i = [genome_i for genome_i in self.genome if genome_i.id==tmpi][0]
                 if MyGetIS.normal_interval(df_h, df_i):
                     if MyGetIS.initialCDS(df_h, df_i):
                         self.counter = MyGetIS.get_last_interval(df_h, genome_i, 
@@ -121,8 +122,8 @@ class MyGetIS(object):
                                                                    counter = self.counter)
 
             elif i == len(self.df)-1:
-                df_h = self.df.loc[i, ]
-                genome_h = [genome_i for genome_i in self.genome if genome_i.id==df_i.sequence][0]
+                df_h = self.df.loc[i, ] ;tmph = df_h.sequence
+                genome_h = [genome_i for genome_i in self.genome if genome_i.id==tmph][0]
                 self.counter = MyGetIS.get_last_interval(df_h, genome_h, 
                                                          id_out = self.id_out, 
                                                          seq_out = self.seq_out, 
