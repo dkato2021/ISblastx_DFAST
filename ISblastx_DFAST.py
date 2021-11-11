@@ -1,23 +1,32 @@
 import os, argparse
-import pandas as pd
 from tqdm import tqdm
+import pandas as pd
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
 def get_args():
     parser = argparse.ArgumentParser() 
-    parser.add_argument('-g' , '--genome', help='path to genome.fasta from DFAST', required=True) 
-    parser.add_argument('-f' , '--features', help='path to features.tsv from DFAST', required=True) 
+    parser.add_argument('-g' , '--genome', required=True,
+                        help='path to genome.fasta from DFAST') 
+    parser.add_argument('-f' , '--features', required=True,
+                        help='path to features.tsv from DFAST') 
     
-    parser.add_argument('-db', '--database', help='nr database', default='/home_ssd/local/db/blastdb.20200904/nr')
-    parser.add_argument('-t' , '--num_threads', type=int, help='num_threads', default=3) 
-    parser.add_argument('-nd', '--num_descriptions', type=int, help='num_descriptions', default=50)
+    parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
+                       help='nr database')
+    parser.add_argument('-t' , '--num_threads', type=int, default=3,
+                       help='num_threads',) 
+    parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
+                       help='num_descriptions')
     
-    parser.add_argument('-m', '--mode', type=str, help='specify the mode of this program', choices=['strict', 'loose'], required=True)
-    parser.add_argument('-e', '--evalue', type=float, help='evalue', default=0.0001)
-    parser.add_argument('-th', '--threshold', type=int, help='threshold', default=300)
+    parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, 
+                       help='specify the mode of this program',)
+    parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
+                       help='evalue')
+    parser.add_argument('-th', '--threshold', type=int, default=300, 
+                       help='threshold')
     
-    parser.add_argument('--Without_blast', type=bool, default=False, help='True or False', choices=[True, False])
+    parser.add_argument('--Without_blast', type=bool, default=False, choices=[True, False],
+                        help='True or False')
     #parser.add_argument('--KYOTO') 
     return parser.parse_args()
 
