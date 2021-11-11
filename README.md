@@ -1,6 +1,6 @@
 # ISblastx_DFAST
 
-##Usage
+## Usage
 ```
 $ python ISblastx_DFAST.py -h
 ```
