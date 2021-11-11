@@ -5,7 +5,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
 def get_args():
-    parser = argparse.ArgumentParser() 
+    parser = argparse.ArgumentParser(description='My blastx') 
     parser.add_argument('-g' , '--genome', required=True,
                         help='path to genome.fasta from DFAST') 
     parser.add_argument('-f' , '--features', required=True,
