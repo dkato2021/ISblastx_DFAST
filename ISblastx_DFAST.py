@@ -198,7 +198,7 @@ def main():
             blastx(dir_in = './each_IS/',
                    num_threads = get_args().num_threads,
                    num_descriptions= get_args().num_descriptions,
-                   db = get_args().DataBase, 
+                   db = get_args().database, 
                    threshold = 300,
                    evalue =.0001 )
             
@@ -206,7 +206,7 @@ def main():
             blastx(dir_in = './each_IS/',
                    num_threads = get_args().num_threads,
                    num_descriptions= get_args().num_descriptions,
-                   db = get_args().DataBase, 
+                   db = get_args().database, 
                    threshold =15,
                    evalue =.01 )
 
