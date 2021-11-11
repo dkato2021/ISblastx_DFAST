@@ -8,12 +8,16 @@ def get_args():
     parser = argparse.ArgumentParser() 
     parser.add_argument('-g' , '--genome', help='path to genome.fasta from DFAST', required=True) 
     parser.add_argument('-f' , '--features', help='path to features.tsv from DFAST', required=True) 
-    parser.add_argument('-db', '--DataBase', help='DataBase', default='/home_ssd/local/db/blastdb.20200904/nr')
+    
+    parser.add_argument('-db', '--database', help='nr database', default='/home_ssd/local/db/blastdb.20200904/nr')
     parser.add_argument('-t' , '--num_threads', type=int, help='num_threads', default=3) 
-    parser.add_argument('-th', '--threshold', type=int, help='threshold', default=900)
     parser.add_argument('-nd', '--num_descriptions', type=int, help='num_descriptions', default=50)
-    parser.add_argument('--Without_blast', type=bool, default=False, help='True or False', choices=[True, False])
+    
+    parser.add_argument('-m', '--mode', type=str, help='specify the mode of this program', choices=['strict', 'loose'], required=True)
     parser.add_argument('-e', '--evalue', type=float, help='evalue', default=0.0001)
+    parser.add_argument('-th', '--threshold', type=int, help='threshold', default=300)
+    
+    parser.add_argument('--Without_blast', type=bool, default=False, help='True or False', choices=[True, False])
     #parser.add_argument('--KYOTO') 
     return parser.parse_args()
 
@@ -179,12 +183,20 @@ def main():
     
     if not get_args().Without_blast:
         print('2.blastx now..')
-        blastx(dir_in = './each_IS/',
-               num_threads = get_args().num_threads,
-               num_descriptions= get_args().num_descriptions,
-               db = get_args().DataBase, 
-               threshold =get_args().threshold,
-               evalue =get_args().evalue )
+        if get_args().mode == "strict":
+            blastx(dir_in = './each_IS/',
+                   num_threads = get_args().num_threads,
+                   num_descriptions= get_args().num_descriptions,
+                   db = get_args().DataBase, 
+                   threshold = 300,
+                   evalue =.0001 )
+        elif get_args().mode == "loose":
+            blastx(dir_in = './each_IS/',
+                   num_threads = get_args().num_threads,
+                   num_descriptions= get_args().num_descriptions,
+                   db = get_args().DataBase, 
+                   threshold =15,
+                   evalue =.01 )
 
 if __name__ == "__main__":
     main()
