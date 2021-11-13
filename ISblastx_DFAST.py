@@ -14,14 +14,14 @@ def get_args():
     parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, 
                        help='specify the mode of this program',)
     parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
-                       help='evalue')
+                       help='evalue in blastx')
     parser.add_argument('-th', '--threshold', type=int, default=300, 
-                       help='threshold')
+                       help='minimum length of IS sequence as input of blastx')
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
                        help='nr database')
     parser.add_argument('-t' , '--num_threads', type=int, default=3,
-                       help='num_threads',) 
+                       help='num_threads in blastx',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
                        help='num_descriptions')
     
@@ -57,6 +57,9 @@ class MyGetIS(object):
     @staticmethod
     def inside(i, last_num):
         return i!=0 and i!=last_num-1
+    @staticmethod
+    def single_interval(tmph, tmpi):
+        return tmph == tmpi
     @staticmethod
     def normal_interval(df_h, df_i):
         return max(int(df_h.start), int(df_h.end)) < min(int(df_i.start), int(df_i.end))
@@ -113,26 +116,28 @@ class MyGetIS(object):
 
             elif MyGetIS.inside(i, len(self.df)):
                 df_h = self.df.loc[i-1, ] ;tmph = df_h.sequence
-                df_i = self.df.loc[i, ] ;tmpi = df_i.sequence
+                df_i = self.df.loc[i, ]   ;tmpi = df_i.sequence
 
                 genome_h = [genome_i for genome_i in self.genome if genome_i.id==tmph][0]
                 genome_i = [genome_i for genome_i in self.genome if genome_i.id==tmpi][0]
-                if MyGetIS.normal_interval(df_h, df_i):
-                    if MyGetIS.initialCDS(df_h, df_i):
-                        self.counter = MyGetIS.get_last_interval(df_h, genome_i, 
-                                                                 id_out = self.id_out, 
-                                                                 seq_out = self.seq_out, 
-                                                                 counter = self.counter)
-                        self.counter = MyGetIS.get_1st_interval(df_i, genome_i, 
-                                                                id_out = self.id_out, 
-                                                                seq_out = self.seq_out, 
-                                                                counter = self.counter)
-
-                    else:
+                
+                if MyGetIS.single_interval(tmph, tmpi):
+                    if MyGetIS.normal_interval(df_h, df_i):
                         self.counter = MyGetIS.get_interval_inside(df_h, df_i, genome_i, 
                                                                    id_out = self.id_out, 
                                                                    seq_out = self.seq_out, 
                                                                    counter = self.counter)
+                    else:
+                        pass
+                else:
+                    self.counter = MyGetIS.get_last_interval(df_h, genome_i, 
+                                                             id_out = self.id_out, 
+                                                             seq_out = self.seq_out, 
+                                                             counter = self.counter)
+                    self.counter = MyGetIS.get_1st_interval(df_i, genome_i, 
+                                                            id_out = self.id_out, 
+                                                            seq_out = self.seq_out, 
+                                                            counter = self.counter)
 
             elif i == len(self.df)-1:
                 df_h = self.df.loc[i, ] ;tmph = df_h.sequence
@@ -169,8 +174,8 @@ def blastx(dir_in = None,
            db = None,
            threshold = None,
            evalue = None):
-    
-    #assert os.path.isfile(''), "specify the path to your nr database"
+    error1 = "specify the path to your nr database with db option. (default:/home_ssd/local/db/blastdb.20200904/nr)"
+    assert os.path.exists('/home_ssd/local/db/blastdb.20200904/'), error1
     if 'res_ISblastx' not in os.listdir(path='./'):
         os.system('mkdir res_ISblastx')
 
