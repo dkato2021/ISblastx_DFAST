@@ -1,4 +1,5 @@
 import sys, os, argparse
+import subprocess
 from tqdm import tqdm
 import pandas as pd
 from Bio import SeqIO
@@ -11,12 +12,12 @@ def get_args():
     parser.add_argument('-f' , '--features', required=True,
                         help='path to features.tsv from DFAST') 
     
-    parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, 
-                       help='specify the mode of this program',)
-    parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
-                       help='evalue in blastx')
-    parser.add_argument('-th', '--threshold', type=int, default=300, 
-                       help='minimum length of IS sequence as input of blastx')
+    parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, default='strict',
+                       help='specify the mode of this program ;(evalue, threshold)=(strict;.0001, 300), (loose;.01, 15)',)
+    #parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
+    #                   help='evalue in blastx')
+    #parser.add_argument('-th', '--threshold', type=int, default=300, 
+    #                   help='minimum length of IS sequence as input of blastx')
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
                        help='nr database')
@@ -194,7 +195,8 @@ def blastx(dir_in = None,
     for fasta_path in os.listdir(path=dir_in):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) >= threshold:
-            os.system(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}")
+            subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
+                          , shell=True)
 
 
 
