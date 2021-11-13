@@ -13,22 +13,21 @@ def get_args():
                         help='path to features.tsv from DFAST') 
     
     parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, default='strict',
-                       help='specify the mode of this program ;(evalue, threshold)=(strict;.0001, 300), (loose;.01, 15)',)
+                       help='specify the mode of blastx ;(evalue, threshold)=(strict;.0001, 300), (loose;.01, 15)',)
     #parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
     #                   help='evalue in blastx')
     #parser.add_argument('-th', '--threshold', type=int, default=300, 
     #                   help='minimum length of IS sequence as input of blastx')
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
-                       help='nr database')
+                       help='path to your nr database (default:/home_ssd/local/db/blastdb.20200904/nr)')
     parser.add_argument('-t' , '--num_threads', type=int, default=8,
                        help='num_threads in blastx',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
-                       help='num_descriptions')
+                       help='num_descriptions in blastx')
     
     parser.add_argument('--Without_blast', type=bool, default=False, choices=[True, False],
-                        help='True or False')
-    #parser.add_argument('--KYOTO') 
+                        help='True or False') 
     return parser.parse_args()
 
 def get_edited_features(path_to_features = None):
@@ -104,7 +103,7 @@ class MyGetIS(object):
         return counter
 
     def get_IS(self):
-        for i in range(len(self.df)):#
+        for i in tqdm(range(len(self.df))):#
             if i == 0:
                 cds_i = self.df.loc[i, ] ;tmpi = cds_i.sequence
                 
@@ -133,15 +132,20 @@ class MyGetIS(object):
                         self.dup_len += dif(cds_h, cds_i)
                         
                 elif tmph != tmpi:
-                    self.double_interval += 1
-                    self.counter = MyGetIS.get_last_interval(cds_h, genome_h, 
-                                                             id_out = self.id_out, 
-                                                             seq_out = self.seq_out, 
-                                                             counter = self.counter)
-                    self.counter = MyGetIS.get_1st_interval(cds_i, genome_i, 
-                                                            id_out = self.id_out, 
-                                                            seq_out = self.seq_out, 
-                                                            counter = self.counter)
+                    def be_last_interval(cds_h, genome_h):
+                        return max(int(cds_h.start), int(cds_h.end)) != len(genome_h.seq)
+                    if be_last_interval(cds_h, genome_h):
+                        self.counter = MyGetIS.get_last_interval(cds_h, genome_h, 
+                                                                 id_out = self.id_out, 
+                                                                 seq_out = self.seq_out, 
+                                                                 counter = self.counter)
+                    def be_initial_interval(cds_i, genome_i):
+                        return min(int(cds_i.start), int(cds_i.end)) != 1
+                    if be_initial_interval(cds_i, genome_i):
+                        self.counter = MyGetIS.get_1st_interval(cds_i, genome_i, 
+                                                                id_out = self.id_out, 
+                                                                seq_out = self.seq_out, 
+                                                                counter = self.counter)
                 else:
                     print('ERROR!') ;sys.exit()
                     
@@ -166,7 +170,8 @@ class MyGetIS(object):
               f"{round(sum(map(lambda x: len(x), seq_out))/1000)}kbp")
         #print("======> Total length of interval_sequences.fasta:",
         #      "{:,}bp".format(sum(map(lambda x: len(x), seq_out))))
-        print( "======> Total length of duplicated CDS          :", round(self.dup_len/1000), "kbp")
+        print( "======> Total length of duplicated CDS          :",
+              round(self.dup_len/1000), "kbp")
         
 def split_fasta(multifasta = None):
     if 'each_IS' not in os.listdir(path='./'):
@@ -192,7 +197,7 @@ def blastx(dir_in = None,
         os.system('mkdir res_ISblastx')
 
     
-    for fasta_path in os.listdir(path=dir_in):
+    for fasta_path in tqdm(os.listdir(path=dir_in)):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) >= threshold:
             subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
