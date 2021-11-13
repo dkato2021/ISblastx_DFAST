@@ -20,7 +20,7 @@ def get_args():
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
                        help='nr database')
-    parser.add_argument('-t' , '--num_threads', type=int, default=3,
+    parser.add_argument('-t' , '--num_threads', type=int, default=8,
                        help='num_threads in blastx',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
                        help='num_descriptions')
@@ -32,7 +32,7 @@ def get_args():
 
 def get_edited_features(path_to_features = None):
     _df = pd.read_table(path_to_features)
-    start, end = [], []
+    start , end = [], []
     
     for i, df_i in enumerate(_df.location):
         if df_i[0] != 'c':
@@ -53,101 +53,106 @@ class MyGetIS(object):
         self.id_out    = []
         self.seq_out   = []
         self.fasta_out = []
+        self.dup_len   = 0
+        self.double_interval = 0
     
     @staticmethod
-    def inside(i, last_num):
-        return i!=0 and i!=last_num-1
+    def judge_inside(i, last_iter):
+        return i!=0 and i!=last_iter
     @staticmethod
-    def single_interval(tmph, tmpi):
-        return tmph == tmpi
-    @staticmethod
-    def normal_interval(df_h, df_i):
-        return max(int(df_h.start), int(df_h.end)) < min(int(df_i.start), int(df_i.end))
-    @staticmethod
-    def initialCDS(df_h, df_i):
-        return df_h.sequence != df_i.sequence
+    def judge_normal_interval(cds_h, cds_i):
+        return max(int(cds_h.start), int(cds_h.end)) < min(int(cds_i.start), int(cds_i.end))
     
     @classmethod
-    def get_1st_interval(cls, df_i, 
+    def get_1st_interval(cls, cds_i, 
                          genome_i, 
                          id_out = None, 
                          seq_out = None, 
                          counter = None):
         start = 1
-        end = min(int(df_i.start), int(df_i.end))
-        seq_out += [genome_i.seq[:end]] ;counter+=1
-        id_out += [f'interval_region{counter}_LEN{end-start+1}_{genome_i.id}_{start}_{end}']
+        end = min(int(cds_i.start), int(cds_i.end)) -1
+        tmp = genome_i.seq[:end]
+        seq_out += [tmp] ;counter+=1
+        id_out += [f'interval_region{counter}_LEN{len(tmp)}_{genome_i.id}_{start}_{end}']
         return counter
 
     @classmethod
-    def get_interval_inside(cls, df_h, df_i, 
+    def get_interval_inside(cls, cds_h, cds_i, 
                             genome_i, 
                             id_out = None, 
                             seq_out = None, 
                             counter = None):
-        start = max(int(df_h.start), int(df_h.end))
-        end = min(int(df_i.start), int(df_i.end))
-        seq_out += [genome_i.seq[start-1:end]] ;counter+=1
-        id_out += [f'interval_region{counter}_LEN{end-start+1}_{genome_i.id}_{start}_{end}']
+        start = max(int(cds_h.start), int(cds_h.end))+1
+        end = min(int(cds_i.start), int(cds_i.end))-1
+        tmp = genome_i.seq[start-1:end]
+        seq_out += [tmp] ;counter+=1
+        id_out += [f'interval_region{counter}_LEN{len(tmp)}_{genome_i.id}_{start}_{end}']
         return counter
 
     @classmethod
-    def get_last_interval(cls, df_h, 
+    def get_last_interval(cls, cds_h, 
                           genome_h, 
                           id_out = None,
                           seq_out = None, 
                           counter = None):
-        start = max(int(df_h.start), int(df_h.end))
-        end = len(str(genome_h.seq))
-        seq_out += [genome_h.seq[end-1:]] ;counter+=1
-        id_out += [f'interval_region{counter}_LEN{end-start+1}_{genome_h.id}_{start}_{end}']
+        start = max(int(cds_h.start), int(cds_h.end))+1
+        end = len(genome_h.seq)
+        tmp = genome_h.seq[start-1:]
+        seq_out += [tmp] ;counter+=1
+        id_out += [f'interval_region{counter}_LEN{len(tmp)}_{genome_h.id}_{start}_{end}']
         return counter
 
     def get_IS(self):
-        for i in tqdm(range(len(self.df))):
+        for i in range(len(self.df)):#
             if i == 0:
-                df_i = self.df.loc[i, ] ;tmpi = df_i.sequence
+                cds_i = self.df.loc[i, ] ;tmpi = cds_i.sequence
                 
                 genome_i = [genome_i for genome_i in self.genome if genome_i.id==tmpi][0]
-                self.counter = MyGetIS.get_1st_interval(df_i, genome_i, 
+                self.counter = MyGetIS.get_1st_interval(cds_i, genome_i, 
                                                         id_out = self.id_out, 
                                                         seq_out = self.seq_out, 
                                                         counter = self.counter)
 
-            elif MyGetIS.inside(i, len(self.df)):
-                df_h = self.df.loc[i-1, ] ;tmph = df_h.sequence
-                df_i = self.df.loc[i, ]   ;tmpi = df_i.sequence
+            elif MyGetIS.judge_inside(i, len(self.df)-1):
+                cds_h = self.df.loc[i-1, ] ;tmph = cds_h.sequence
+                cds_i = self.df.loc[i, ]   ;tmpi = cds_i.sequence
 
-                genome_h = [genome_i for genome_i in self.genome if genome_i.id==tmph][0]
+                genome_h = [genome_h for genome_h in self.genome if genome_h.id==tmph][0]
                 genome_i = [genome_i for genome_i in self.genome if genome_i.id==tmpi][0]
                 
-                if MyGetIS.single_interval(tmph, tmpi):
-                    if MyGetIS.normal_interval(df_h, df_i):
-                        self.counter = MyGetIS.get_interval_inside(df_h, df_i, genome_i, 
+                if tmph == tmpi:
+                    if MyGetIS.judge_normal_interval(cds_h, cds_i):
+                        self.counter = MyGetIS.get_interval_inside(cds_h, cds_i, genome_i, 
                                                                    id_out = self.id_out, 
                                                                    seq_out = self.seq_out, 
                                                                    counter = self.counter)
-                    else:
-                        pass
-                else:
-                    self.counter = MyGetIS.get_last_interval(df_h, genome_i, 
+                    else: # duplicate CDS
+                        def dif(x, y):
+                            return max(int(x.start), int(x.end)) - min(int(y.start), int(y.end)) + 1
+                        self.dup_len += dif(cds_h, cds_i)
+                        
+                elif tmph != tmpi:
+                    self.double_interval += 1
+                    self.counter = MyGetIS.get_last_interval(cds_h, genome_h, 
                                                              id_out = self.id_out, 
                                                              seq_out = self.seq_out, 
                                                              counter = self.counter)
-                    self.counter = MyGetIS.get_1st_interval(df_i, genome_i, 
+                    self.counter = MyGetIS.get_1st_interval(cds_i, genome_i, 
                                                             id_out = self.id_out, 
                                                             seq_out = self.seq_out, 
                                                             counter = self.counter)
-
+                else:
+                    print('ERROR!') ;sys.exit()
+                    
             elif i == len(self.df)-1:
-                df_h = self.df.loc[i, ] ;tmph = df_h.sequence
-                genome_h = [genome_i for genome_i in self.genome if genome_i.id==tmph][0]
-                self.counter = MyGetIS.get_last_interval(df_h, genome_h, 
+                cds_i = self.df.loc[i, ] ;tmpi = cds_i.sequence
+                genome_i = [genome_i for genome_i in self.genome if genome_i.id==tmpi][0]
+                self.counter = MyGetIS.get_last_interval(cds_i, genome_i, 
                                                          id_out = self.id_out, 
                                                          seq_out = self.seq_out, 
                                                          counter = self.counter)
-            else:
-                print('ERROR!') ;sys.exit()
+            
+        #print(self.double_interval)
         return self.id_out, self.seq_out
     
     def main(self, id_out, seq_out):
@@ -156,6 +161,11 @@ class MyGetIS(object):
                                          id=id_out[j], 
                                          description=id_out[j])]
         SeqIO.write(self.fasta_out, os.path.join(f'interval_regions.fasta'), "fasta")
+        print(f"======> Total length of interval_sequences.fasta:",
+              f"{round(sum(map(lambda x: len(x), seq_out))/1000)}kbp")
+        #print("======> Total length of interval_sequences.fasta:",
+        #      "{:,}bp".format(sum(map(lambda x: len(x), seq_out))))
+        print( "======> Total length of duplicated CDS          :", round(self.dup_len/1000), "kbp")
         
 def split_fasta(multifasta = None):
     if 'each_IS' not in os.listdir(path='./'):
@@ -176,15 +186,17 @@ def blastx(dir_in = None,
            evalue = None):
     error1 = "specify the path to your nr database with db option. (default:/home_ssd/local/db/blastdb.20200904/nr)"
     assert os.path.exists('/home_ssd/local/db/blastdb.20200904/'), error1
+    
     if 'res_ISblastx' not in os.listdir(path='./'):
         os.system('mkdir res_ISblastx')
 
-    for fasta_path in tqdm(os.listdir(path=dir_in)):
+    
+    for fasta_path in os.listdir(path=dir_in):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
-        if len(fasta.seq) > threshold:
+        if len(fasta.seq) >= threshold:
             os.system(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}")
-        else:
-            pass
+
+
 
 def main():
     df     = get_edited_features(path_to_features = get_args().features)
@@ -217,3 +229,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
