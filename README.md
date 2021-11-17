@@ -36,7 +36,7 @@ $ python ISblastx_DFAST.py -g genome.fasta -f featues.tsv
                         If "True", blastx will not be executed.(default:False)
 ```
 
-## 懸案事項
+## 補足事項
 - CDS間領域を数十kbpほど抽出できていない可能性があるため、原因が判明次第プログラムを修正する予定です。
 
 
