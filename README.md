@@ -2,9 +2,7 @@
 
 ## Usage
 ```
-$ python ISblastx_DFAST.py [-h] -g GENOME -f FEATURES [-e EVALUE]
-                         [-th THRESHOLD] [-db DATABASE] [-t NUM_THREADS]
-                         [-nd NUM_DESCRIPTIONS] [--Without_blast {True,False}]
+$ python ISblastx_DFAST.py -g genome.fasta -f featues.tsv
 ```
 ## optional arguments
 ```
