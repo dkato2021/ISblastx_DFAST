@@ -1,14 +1,13 @@
 # ISblastx_DFAST
 
 ## Usage
-
-$ python ISblastx_DFAST.py -h
 ```
- python ISblastx_DFAST.py [-h] -g GENOME -f FEATURES [-e EVALUE]
+$ python ISblastx_DFAST.py [-h] -g GENOME -f FEATURES [-e EVALUE]
                          [-th THRESHOLD] [-db DATABASE] [-t NUM_THREADS]
                          [-nd NUM_DESCRIPTIONS] [--Without_blast {True,False}]
 ```
 ## optional arguments
+```
   -h, --help            show this help message and exit
   -g GENOME             path to genome.fasta from DFAST. The contig ID is
                         unified in the form of "sequence~"
@@ -28,3 +27,4 @@ $ python ISblastx_DFAST.py -h
                         num_descriptions in blastx.(default:50)
   --Without_blast {True,False}
                         If "True", blastx will not be executed.(default:False)
+```
