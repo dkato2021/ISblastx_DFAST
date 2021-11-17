@@ -35,4 +35,9 @@ $ python ISblastx_DFAST.py -g genome.fasta -f featues.tsv
 ```
 
 ## 懸案事項
-- CDS間領域が数十kbpほど抽出できない可能性がある。原因が判明次第、プログラムは修正します
+- CDS間領域を数十kbpほど抽出できていない可能性があるため、原因が判明次第プログラムを修正する予定です。
+
+
+
+
+
