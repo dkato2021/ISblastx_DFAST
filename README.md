@@ -6,7 +6,9 @@
 - 出力データ
   - CDS間領域の塩基配列データ(-> interval_regions.fasta)
   - CDS間領域のblastxの結果
-
+- 依存
+  - python 3.7
+  - biopython 1.77
 ## Usage
 ```
 $ python ISblastx_DFAST.py -g genome.fasta -f featues.tsv
