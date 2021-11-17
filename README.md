@@ -1,4 +1,4 @@
-# ISblastx_DFAST
+# ISblastx_DFAST.py
 
 - 入力データ
   - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されたもの)
