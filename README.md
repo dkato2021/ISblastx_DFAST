@@ -1,5 +1,8 @@
 # ISblastx_DFAST
 
+- 入力データ:DFASTが出力したgenome.fastaとfeatures.tsv
+- 出力データ:遺伝子間領域のfasatファイルとそのblastxの結果
+
 ## Usage
 ```
 $ python ISblastx_DFAST.py -g genome.fasta -f featues.tsv
