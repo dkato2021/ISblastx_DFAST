@@ -6,28 +6,26 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
 def get_args():
-    parser = argparse.ArgumentParser(description='My blastx') 
-    parser.add_argument('-g' , '--genome', required=True,
-                        help='path to genome.fasta from DFAST') 
+    parser = argparse.ArgumentParser(description='dkato. November, 2021') 
+    parser.add_argument('-g' , dest ='genome', required=True,
+                        help='path to genome.fasta from DFAST. The contig ID is unified in the form of "sequence~"') 
     parser.add_argument('-f' , '--features', required=True,
                         help='path to features.tsv from DFAST') 
     
-    parser.add_argument('-m', '--mode', type=str, choices=['strict', 'loose'], required=True, default='strict',
-                       help='specify the mode of blastx ;(evalue, threshold)=(strict;.0001, 300), (loose;.01, 15)',)
-    #parser.add_argument('-e', '--evalue', type=float, default=0.0001, 
-    #                   help='evalue in blastx')
-    #parser.add_argument('-th', '--threshold', type=int, default=300, 
-    #                   help='minimum length of IS sequence as input of blastx')
+    parser.add_argument('-e', '--evalue', type=float, default=.0001, 
+                       help='evalue in blastx.(default:0.0001)')
+    parser.add_argument('-th', '--threshold', type=int, default=50, 
+                       help='minimum length of IS sequence as input of blastx.(default:50)')
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
-                       help='path to your nr database (default:/home_ssd/local/db/blastdb.20200904/nr)')
-    parser.add_argument('-t' , '--num_threads', type=int, default=8,
-                       help='num_threads in blastx',) 
+                       help='path to your nr database.(default:/home_ssd/local/db/blastdb.20200904/nr)')
+    parser.add_argument('-t' , '--num_threads', type=int, default=16,
+                       help='num_threads in blastx.(default:16)',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
-                       help='num_descriptions in blastx')
+                       help='num_descriptions in blastx.(default:50)')
     
     parser.add_argument('--Without_blast', type=bool, default=False, choices=[True, False],
-                        help='True or False') 
+                        help='If "True", blastx will not be executed.(default:False)') 
     return parser.parse_args()
 
 def get_edited_features(path_to_features = None):
@@ -35,14 +33,16 @@ def get_edited_features(path_to_features = None):
     start , end = [], []
     
     for i, df_i in enumerate(_df.location):
+        temp = df_i.split
         if df_i[0] != 'c':
-            start += [df_i.split('..')[0]]
-            end += [df_i.split('..')[1]]
+            start += [temp('..')[0]]
+            end += [temp('..')[1]]
         else:
-            start += [df_i.split('..')[1][:-1]]
-            end += [df_i.split('..')[0][len('complement('):]]
+            start += [temp('..')[1][:-1]]
+            end += [temp('..')[0][len('complement('):]]
     cds = pd.DataFrame(columns = ['start', 'end'])
     cds.start, cds.end = start, end
+    pd.concat([cds, _df], axis = 1).to_csv("new_feature.csv")
     return  pd.concat([_df.sequence, cds], axis = 1)
 
 class MyGetIS(object):
@@ -58,7 +58,7 @@ class MyGetIS(object):
     
     @staticmethod
     def judge_inside(i, last_iter):
-        return i!=0 and i!=last_iter
+        return i != 0 and i != last_iter
     @staticmethod
     def judge_normal_interval(cds_h, cds_i):
         return max(int(cds_h.start), int(cds_h.end)) < min(int(cds_i.start), int(cds_i.end))
@@ -66,7 +66,7 @@ class MyGetIS(object):
     @classmethod
     def get_1st_interval(cls, cds_i, 
                          genome_i, 
-                         id_out = None, 
+                         id_out  = None, 
                          seq_out = None, 
                          counter = None):
         start = 1
@@ -201,13 +201,15 @@ def blastx(dir_in = None,
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) >= threshold:
             subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
-                          , shell=True)
-
-
+                          ,shell=True)
+    
 
 def main():
     df     = get_edited_features(path_to_features = get_args().features)
     genome = list(SeqIO.parse(get_args().genome, "fasta"))
+    
+    error2 = 'The contig ID does not match the ID specified in feature.tsv. Please use a genome.fasta, the ID of contig is unified in the form of "sequence~" which is output by DFAST'
+    assert df.sequence[0]==genome[0].id, error2 
     
     print('1.extracting IS..')
     instance = MyGetIS(df = df,
@@ -218,21 +220,13 @@ def main():
     
     if not get_args().Without_blast:
         print('2.blastx now..')
-        if get_args().mode == "strict":
-            blastx(dir_in = './each_IS/',
-                   num_threads = get_args().num_threads,
-                   num_descriptions= get_args().num_descriptions,
-                   db = get_args().database, 
-                   threshold = 300,
-                   evalue =.0001 )
-            
-        elif get_args().mode == "loose":
-            blastx(dir_in = './each_IS/',
-                   num_threads = get_args().num_threads,
-                   num_descriptions= get_args().num_descriptions,
-                   db = get_args().database, 
-                   threshold =15,
-                   evalue =.01 )
+        blastx(dir_in = './each_IS/',
+               num_threads = get_args().num_threads,
+               num_descriptions= get_args().num_descriptions,
+               db = get_args().database, 
+               threshold = get_args().threshold,
+               evalue = get_args().evalue )
+
 
 if __name__ == "__main__":
     main()
