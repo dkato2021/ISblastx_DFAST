@@ -4,7 +4,7 @@
   - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されたもの)
   - DFASTが出力したfeatures.tsv.(CDSの開始点と終了点およびそのCDSが抽出されたcontig IDを使用)
 - 出力データ
-  - CDS間領域の塩基配列データ
+  - CDS間領域の塩基配列データ(-> interval_regions.fasta)
   - CDS間領域のblastxの結果
 
 ## Usage
