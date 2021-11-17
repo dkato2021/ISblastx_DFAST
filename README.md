@@ -2,7 +2,7 @@
 
 - 入力データ
   - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されたもの)
-  - DFASTが出力したfeatures.tsv
+  - DFASTが出力したfeatures.tsv.(CDSの開始点と終了点およびそのCDSが抽出されたcontig IDを使用)
 - 出力データ
   - CDS間領域の塩基配列データ
   - CDS間領域のblastxの結果
@@ -33,3 +33,6 @@ $ python ISblastx_DFAST.py -g genome.fasta -f featues.tsv
   --Without_blast {True,False}
                         If "True", blastx will not be executed.(default:False)
 ```
+
+## 懸案事項
+- CDS間領域が数十kbpほど抽出できない可能性がある。原因が判明次第、プログラムは修正します
