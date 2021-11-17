@@ -1,7 +1,7 @@
 # ISblastx_DFAST
 
 - 入力データ
-  - DFASTが出力したgenome.fasta
+  - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されたもの)
   - DFASTが出力したfeatures.tsv
 - 出力データ
   - CDS間領域の塩基配列データ
