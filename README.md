@@ -1,7 +1,11 @@
 # ISblastx_DFAST
 
-- 入力データ:DFASTが出力したgenome.fastaとfeatures.tsv
-- 出力データ:遺伝子間領域のfasatファイルとそのblastxの結果
+- 入力データ
+  - DFASTが出力したgenome.fasta
+  - DFASTが出力したfeatures.tsv
+- 出力データ
+  - CDS間領域の塩基配列データ
+  - CDS間領域のblastxの結果
 
 ## Usage
 ```
