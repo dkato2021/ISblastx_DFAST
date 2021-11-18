@@ -1,5 +1,6 @@
 # ISblastx_DFAST.py
 
+## 入出力と依存
 - 入力データ
   - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されているもの)
   - DFASTが出力したfeatures.tsv.(CDSの開始点と終了点およびそのCDSが抽出されたcontig IDを使用)
