@@ -42,7 +42,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 適合率(precision) :%  
 再現率(recall):%  
 F1スコア:%  
-![](file:///Users/daiki/Desktop/A.png)
+![](https://drive.google.com/file/d/15mci5FgW1ndSapwt6lD65OEuJw4h2gVN/view?usp=sharing)
 
 
 2. CDS間領域に存在する新たなCDSの発見について  
