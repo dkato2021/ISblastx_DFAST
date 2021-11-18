@@ -53,7 +53,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - F1スコア : %  
   - 混合行列↓  
 ![](./image/A.png)
-(0, 1) = (変更なし, 新たなCDSを発見)
+(0, 1) = (変更なし, 新CDSを発見)
 
 ## 補足事項
 - CDS間領域が数十kbpほど抽出されていない可能性があるため、原因が分かり次第プログラムを修正する予定である。
