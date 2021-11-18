@@ -1,7 +1,7 @@
 # ISblastx_DFAST.py
 
 - 入力データ
-  - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されたもの)
+  - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されているもの)
   - DFASTが出力したfeatures.tsv.(CDSの開始点と終了点およびそのCDSが抽出されたcontig IDを使用)
 - 出力データ
   - CDS間領域の塩基配列データ(-> interval_regions.fasta)
