@@ -36,7 +36,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
                         If "True", blastx will not be executed.(default:False)
 ```
 ## 性能の評価
-`CDSの開始点と終了点の精査、およびCDS間領域での探索、２つの作業についてt吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
+`２つの作業、つまりCDSの開始点と終了点の精査、およびCDS間領域での探索についてt吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
 - CDS領域について
   - 正解率(accuracy) : %  
   - 適合率(precision) : %  
