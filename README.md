@@ -42,6 +42,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - 適合率(precision) : %  
   - 再現率(recall) : %  
   - F1スコア : %  
+  - 混合行列↓  
 ![](./image/A.png)
 (0, 1) = (変更なし, CDS領域を変更)
 
@@ -50,6 +51,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - 適合率(precision) : %  
   - 再現率(recall) : %  
   - F1スコア : %  
+  - 混合行列↓  
 ![](./image/A.png)
 (0, 1) = (変更なし, 新たなCDSを発見)
 
