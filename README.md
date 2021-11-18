@@ -13,7 +13,6 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - CDS間領域のblastxの結果
 - 依存
   - python 3.7
-  - biopython 1.77
 
 ## 性能の評価
 `２つの作業、つまりCDSの開始点と終了点の精査、およびCDS間領域における新CDSの探索について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
