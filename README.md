@@ -37,7 +37,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 ```
 ## 性能の評価
 `2つの作業、つまりCDS領域の開始点変更とCDS間領域に存在する新たなCDSの発見について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`
-1. CDS領域の開始点変更について  
+**1. CDS領域の開始点変更について**
     - 正解率(accuracy) : %  
     - 適合率(precision) : %  
     - 再現率(recall) : %  
@@ -45,7 +45,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 ![](./image/A.png)
 (0, 1) = (変更なし, 開始点を変更)
 
-2. CDS間領域に存在する新たなCDSの発見について  
+**2. CDS間領域に存在する新たなCDSの発見について**
     - 正解率(accuracy) : %  
     - 適合率(precision) : %  
     - 再現率(recall) : %  
