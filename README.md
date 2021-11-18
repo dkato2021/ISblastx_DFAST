@@ -1,5 +1,9 @@
 # ISblastx_DFAST.py
 **DFASTが出力するデータを継承して、CDS間領域をblastxするスクリプト**
+## Usage
+```
+$ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
+```
 ## 入出力と依存
 - 入力データ
   - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されているもの)
@@ -32,10 +36,7 @@
 (0, 1) = (変更なし, 新CDSを発見)
 
 ``実用可能かどうかについて言及する``
-## Usage
-```
-$ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
-```
+
 ## optional arguments
 ```
   -h, --help            show this help message and exit
