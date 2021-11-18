@@ -40,11 +40,12 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 
 ``実用可能かどうかについて言及する``
 
-## 作業時間
-- CDS領域の開始点と終了点を精査する作業について
+## 作業内容の変化
+- CDS領域の開始点と終了点を精査する作業について  
 本スクリプトを使用すると開始点と終了点を変更する必要があるCDSを一度に列挙することができ、DFASTが抽出したCDSの前後の領域をgeneticsやexpacyなどを使用して参照する作業の回数を減らすことができる。
 
-- CDS間領域における新CDSの探索について
+- CDS間領域における新CDSの探索について  
+
 
 
 ## optional arguments
