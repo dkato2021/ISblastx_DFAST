@@ -42,10 +42,10 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 
 ## 作業内容の変化
 - CDS領域の開始点と終了点を精査する作業について  
-本スクリプトを使用すると開始点と終了点を変更する必要があるCDSを一度に列挙することができ、DFASTが抽出したCDSの前後の領域をgeneticsやexpacyなどを使用して参照する作業の回数を減らすことができる。
+本スクリプトを使用すると開始点と終了点を変更する必要があるCDSを一度に列挙することができ、DFASTが抽出したCDSの前後の領域をgeneticsやexpacyなどを使用して参照する作業の回数を減ると考えられる。
 
 - CDS間領域における新CDSの探索について  
-
+特になし
 
 
 ## optional arguments
