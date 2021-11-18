@@ -24,7 +24,8 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - F1スコア : %  
   - 混合行列↓  
 ![](./image/A.png)
-(0, 1) = (変更なし, CDS領域を変更)
+(0, 1) = (変更なし, CDS領域を変更)  
+``コメント``  
 
 - CDS間領域における新CDSの探索について
   - 正解率(accuracy) : %  
@@ -34,6 +35,8 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - 混合行列↓  
 ![](./image/A.png)
 (0, 1) = (変更なし, 新CDSを発見)
+
+``コメント``  
 
 ``実用可能かどうかについて言及する``
 
