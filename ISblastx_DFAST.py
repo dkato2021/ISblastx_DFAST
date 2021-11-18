@@ -46,7 +46,6 @@ def get_edited_features(path_to_features = None):
     return  pd.concat([_df.sequence, cds], axis = 1)
 
 class MyGetIS(object):
-    
     def __init__(self, df = None, genome = None):
         self.df        = df 
         self.genome    = genome
