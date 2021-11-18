@@ -59,6 +59,7 @@ class MyGetIS(object):
     @staticmethod
     def judge_inside(i, last_iter):
         return i != 0 and i != last_iter
+    
     @staticmethod
     def judge_normal_interval(cds_h, cds_i):
         return max(int(cds_h.start), int(cds_h.end)) < min(int(cds_i.start), int(cds_i.end))
@@ -203,7 +204,6 @@ def blastx(dir_in = None,
             subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
                           ,shell=True)
     
-
 def main():
     df     = get_edited_features(path_to_features = get_args().features)
     genome = list(SeqIO.parse(get_args().genome, "fasta"))
@@ -227,8 +227,5 @@ def main():
                threshold = get_args().threshold,
                evalue = get_args().evalue )
 
-
 if __name__ == "__main__":
     main()
-
-
