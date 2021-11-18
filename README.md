@@ -1,5 +1,5 @@
 # ISblastx_DFAST.py
-
+**DFASTが出力するデータを継承して、CDS間領域をblastxするスクリプト**
 ## 入出力と依存
 - 入力データ
   - DFASTが出力したgenome.fasta.(contig IDが'sequence~'の形で統一されているもの)
