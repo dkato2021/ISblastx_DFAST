@@ -197,7 +197,6 @@ def blastx(dir_in = None,
     if 'res_ISblastx' not in os.listdir(path='./'):
         os.system('mkdir res_ISblastx')
 
-    
     for fasta_path in tqdm(os.listdir(path=dir_in)):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) >= threshold:
