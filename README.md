@@ -9,6 +9,27 @@
 - 依存
   - python 3.7
   - biopython 1.77
+
+## 性能の評価
+`２つの作業、つまりCDSの開始点と終了点の精査、およびCDS間領域における新CDSの探索について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
+- CDS領域の開始点と終了点を精査する作業について
+  - 正解率(accuracy) : %  
+  - 適合率(precision) : %  
+  - 再現率(recall) : %  
+  - F1スコア : %  
+  - 混合行列↓  
+![](./image/A.png)
+(0, 1) = (変更なし, CDS領域を変更)
+
+- CDS間領域における新CDSの探索について
+  - 正解率(accuracy) : %  
+  - 適合率(precision) : %  
+  - 再現率(recall) : %  
+  - F1スコア : %  
+  - 混合行列↓  
+![](./image/A.png)
+(0, 1) = (変更なし, 新CDSを発見)
+
 ## Usage
 ```
 $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
@@ -35,25 +56,6 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   --Without_blast {True,False}
                         If "True", blastx will not be executed.(default:False)
 ```
-## 性能の評価
-`２つの作業、つまりCDSの開始点と終了点の精査、およびCDS間領域における新CDSの探索について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
-- CDS領域の開始点と終了点を精査する作業について
-  - 正解率(accuracy) : %  
-  - 適合率(precision) : %  
-  - 再現率(recall) : %  
-  - F1スコア : %  
-  - 混合行列↓  
-![](./image/A.png)
-(0, 1) = (変更なし, CDS領域を変更)
-
-- CDS間領域における新CDSの探索について
-  - 正解率(accuracy) : %  
-  - 適合率(precision) : %  
-  - 再現率(recall) : %  
-  - F1スコア : %  
-  - 混合行列↓  
-![](./image/A.png)
-(0, 1) = (変更なし, 新CDSを発見)
 
 ## 補足事項
 - CDS間領域が数十kbpほど抽出されていない可能性があるため、原因が分かり次第プログラムを修正する予定である。
