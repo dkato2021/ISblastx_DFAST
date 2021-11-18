@@ -36,16 +36,16 @@ $ python3 ISblastx_DFAST.py -g genome.fasta -f featues.tsv
                         If "True", blastx will not be executed.(default:False)
 ```
 ## 性能の評価
-** ①CDS領域の開始点変更と②CDS間領域に存在する新たなCDSの発見について、t吉岡氏がマニュアルで行なった結果と  
-本スクリプトを使用して行なった結果の比較を行なった。**
+**①CDS領域の開始点変更と②CDS間領域に存在する新たなCDSの発見について、t吉岡氏がマニュアルで行なった結果と  
+本スクリプトを使用して行なった結果の比較を行なった**
 
-** ①CDS領域の開始点変更について **
+**①CDS領域の開始点変更について**
 - accuracy
 
 - F1 score
 
 
-**②CDS間領域に存在する新たなCDSの発見について
+**②CDS間領域に存在する新たなCDSの発見について**
 - accuracy
 
 - F1 score
