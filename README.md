@@ -31,6 +31,7 @@
 ![](./image/A.png)
 (0, 1) = (変更なし, 新CDSを発見)
 
+``実用可能かどうかについて言及する``
 ## Usage
 ```
 $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
