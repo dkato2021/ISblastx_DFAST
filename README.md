@@ -11,7 +11,7 @@
   - biopython 1.77
 ## Usage
 ```
-$ python3 ISblastx_DFAST.py -g genome.fasta -f featues.tsv
+$ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 ```
 ## optional arguments
 ```
