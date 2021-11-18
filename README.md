@@ -43,14 +43,15 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 再現率(recall):%  
 F1スコア:%  
 ![](./image/A.png)
-
+(0, 1) = (変更点なし, 開始点を変更)
 
 2. CDS間領域に存在する新たなCDSの発見について  
 正解率(accuracy) :%  
 適合率(precision) :%  
 再現率(recall):%  
-F1スコア:%
-
+F1スコア:%  
+![](./image/A.png)
+(0, 1) = (変更点なし, 新たなCDSを発見)
 
 ## 補足事項
 - CDS間領域が数十kbpほど抽出されていない可能性があるため、原因が分かり次第プログラムを修正する予定である。
