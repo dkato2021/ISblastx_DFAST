@@ -38,15 +38,19 @@ $ python3 ISblastx_DFAST.py -g genome.fasta -f featues.tsv
 ## 性能の評価
 `2つの作業、つまりCDS領域の開始点変更とCDS間領域に存在する新たなCDSの発見について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`
 1. CDS領域の開始点変更について
-- accuracy
+- accuracy ==>
 
-- F1 score
+- F1 score ==>
+
+
 
 
 2. CDS間領域に存在する新たなCDSの発見について
-- accuracy
+- accuracy ==>
 
-- F1 score
+- F1 score ==>
+
+
 ## 補足事項
 - CDS間領域が数十kbpほど抽出されていない可能性があるため、原因が分かり次第プログラムを修正する予定である。
 
