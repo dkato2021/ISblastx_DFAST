@@ -16,7 +16,6 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 
 ## 性能の評価
 `２つの作業、つまりCDSの開始点と終了点の精査およびCDS間領域における新CDSの探索について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
-`I have compared the results of the two tasks, i.e., examining the start and end points of CDSs and searching for new CDSs in the area between CDSs, between the results obtained manually by tyoshioka and the results obtained by using this script.`  
 
 - CDS領域の開始点と終了点を精査する作業について
   - 正解率(accuracy) : %  
