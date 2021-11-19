@@ -204,14 +204,14 @@ def blastx(dir_in = None,
                           ,shell=True)
     
 def main():
-    #1
+    #load data
     df     = get_edited_features(path_to_features = get_args().features)
     genome = list(SeqIO.parse(get_args().genome, "fasta"))
     
     error2 = 'The contig ID does not match the ID specified in feature.tsv. Please use a genome.fasta, the ID of contig is unified in the form of "sequence~" which is output by DFAST'
     assert df.sequence[0]==genome[0].id, error2 
     
-    #2
+    #get IS
     print('1.extracting IS..')
     instance = MyGetIS(df = df,
                        genome = genome)
@@ -219,7 +219,7 @@ def main():
     instance.main(seq_out, id_out)
     split_fasta(multifasta ='./interval_regions.fasta')
     
-    #3
+    #blastx
     if not get_args().Without_blast:
         print('2.blastx now..')
         blastx(dir_in = './each_IS/',
