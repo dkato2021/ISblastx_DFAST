@@ -37,7 +37,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 ![](./images/newCDS.png)
 (0, 1) = (変更なし, 新CDSを発見)  
 
-  ``comment=> t吉岡氏が行なったCDS間領域における新CDSの探索は、blastxするCDS間領域の最低長を300bpにして行なったものである。本スクリプトではその閾値を50bpに設定してblastxしているため、t吉岡氏が発見できていないCDSを見つけている可能性がある。``  
+  ``comment=> ``  
 
 ``実用可能かどうかについて言及する``
 
