@@ -39,7 +39,6 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 
   ``comment=> 吉岡君が25の新CDSを発見したのに対して、本スクリプトを使用した結果は39であった。吉岡君はCDS間領域の塩基配列に対して最低塩基長300bpという閾値を設けてblastxしたため、300bp未満のCDS間領域に存在する新CDSを見落としている可能性がある。``  
 
-``実用可能かどうかについて言及する``
 
 ## 影響
 - CDS領域の開始点と終了点の精査について  
