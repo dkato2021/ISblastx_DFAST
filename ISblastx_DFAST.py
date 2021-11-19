@@ -14,7 +14,7 @@ def get_args():
     
     parser.add_argument('-e', '--evalue', type=float, default=.0001, 
                        help='evalue in blastx.(default:0.0001)')
-    parser.add_argument('-th', '--threshold', type=int, default=50, 
+    parser.add_argument('-th', '--threshold', type=int, default=0, 
                        help='minimum length of IS sequence as input of blastx.(default:50)')
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
