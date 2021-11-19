@@ -1,5 +1,6 @@
 # ISblastx_DFAST.py
-**DFASTが出力するデータを継承して遺伝子間領域をblastxするスクリプト**
+**[DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")が出力するデータを継承して遺伝子間領域をblastxするスクリプト**
+
 ## Usage
 ```
 $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
