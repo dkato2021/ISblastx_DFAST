@@ -34,7 +34,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   - 再現率(recall) : 48.00%  
   - F1スコア : 38.71%  
   - 混合行列↓  
-![](./images/CDS.png)
+![](./images/B.png)
 (0, 1) = (変更なし, 新CDSを発見)  
 
   ``comment=> ``  
