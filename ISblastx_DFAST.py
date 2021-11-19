@@ -24,7 +24,7 @@ def get_args():
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
                        help='num descriptions in blastx.(default:50)')
     
-    parser.add_argument('-x',dest='x' type=bool, default=False, choices=[True, False],
+    parser.add_argument('-x',dest='x',  type=bool, default=False, choices=[True, False],
                         help='If "True", blastx will not be executed.(default:False)') 
     return parser.parse_args()
 
