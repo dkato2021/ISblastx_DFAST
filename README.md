@@ -18,10 +18,10 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 `２つの作業、つまりCDSの開始点と終了点の精査およびCDS間領域における新CDSの探索について、t吉岡氏がマニュアルで行なった結果と本スクリプトを使用して行なった結果の比較を行なった`  
 
 - CDS領域の開始点と終了点を精査する作業について
-  - 正解率(accuracy) : 93.05%  
-  - 適合率(precision) : 39.02%  
-  - 再現率(recall) : 23.53%  
-  - F1スコア : 29.36%  
+  - 正解率(accuracy) : 93.77%  
+  - 適合率(precision) : 48.89%  
+  - 再現率(recall) : 32.35%  
+  - F1スコア : 38.94%  
   - 混合行列↓  
 ![](./images/A.png)
 (0, 1) = (変更なし, CDS領域を変更)  
