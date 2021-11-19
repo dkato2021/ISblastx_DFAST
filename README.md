@@ -26,7 +26,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 ![](./images/A_ver2.png)
 (0, 1) = (変更なし, CDS領域を変更)  
 
-  ``comment=> t吉岡氏が68のCDS領域に対して開始点変更を行ったのに対して、本スクリプトを使用した結果は出会った。今回の実験ではblastxに使用する配列の最低塩基長として50bpという閾値を使用したが、この閾値の値を下げることでより多く開始点の変更が必要であるCDSを検出できる可能性がある。``  
+  ``comment=> t吉岡氏が68のCDS領域に対して開始点変更を行ったのに対して、本スクリプトを使用した結果は45であった。今回の実験ではblastxに使用する配列の最低塩基長として50bpという閾値を使用したため、この閾値の値を下げることでより多く開始点の変更が必要であるCDSを検出できる可能性がある。``  
 
 - CDS間領域における新CDSの探索について
   - 正解率(accuracy) : 96.57%  
@@ -37,7 +37,7 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
 ![](./images/B.png)
 (0, 1) = (変更なし, 新CDSを発見)  
 
-  ``comment=> t吉岡氏のアノテーションと比べて新たなCDSを多く検出することができた。``  
+  ``comment=> t吉岡氏が68の新CDSを発見したのに対して、本スクリプトを使用した結果は45であった。``  
 
 ``実用可能かどうかについて言及する``
 
