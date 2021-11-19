@@ -29,12 +29,12 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   ``comment=> 高いスコアを記録できるような気がしている``  
 
 - CDS間領域における新CDSの探索について
-  - 正解率(accuracy) : %  
-  - 適合率(precision) : %  
-  - 再現率(recall) : %  
-  - F1スコア : %  
+  - 正解率(accuracy) : 96.39%  
+  - 適合率(precision) : 28.57%  
+  - 再現率(recall) : 40.00%  
+  - F1スコア : 33.33%  
   - 混合行列↓  
-![](./image/A.png)
+![](./images/newCDS.png)
 (0, 1) = (変更なし, 新CDSを発見)  
 
   ``comment=> t吉岡氏が行なったCDS間領域における新CDSの探索は、blastxするCDS間領域の最低長を300bpにして行なったものである。本スクリプトではその閾値を50bpに設定してblastxしているため、t吉岡氏が発見できていないCDSを見つけている可能性がある。``  
