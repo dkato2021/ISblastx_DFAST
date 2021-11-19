@@ -29,10 +29,10 @@ $ python3 ISblastx_DFAST.py -g genome_sample.fasta -f featues_sample.tsv
   ``comment=> 高いスコアを記録できるような気がしている``  
 
 - CDS間領域における新CDSの探索について
-  - 正解率(accuracy) : 96.39%  
-  - 適合率(precision) : 28.57%  
-  - 再現率(recall) : 40.00%  
-  - F1スコア : 33.33%  
+  - 正解率(accuracy) : 96.57%  
+  - 適合率(precision) : 32.4%  
+  - 再現率(recall) : 48.00%  
+  - F1スコア : 38.71%  
   - 混合行列↓  
 ![](./images/CDS.png)
 (0, 1) = (変更なし, 新CDSを発見)  
