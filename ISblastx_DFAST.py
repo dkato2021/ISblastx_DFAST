@@ -9,7 +9,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='dkato. November, 2021') 
     parser.add_argument('-g' , dest ='genome', required=True,
                         help='path to genome.fasta from DFAST. The contig ID is unified in the form of "sequence~"') 
-    parser.add_argument('-f' , '--features', required=True,
+    parser.add_argument('-f' , dest ='features', required=True,
                         help='path to features.tsv from DFAST') 
     
     parser.add_argument('-e', '--evalue', type=float, default=.0001, 
