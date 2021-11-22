@@ -185,7 +185,7 @@ def split_fasta(multifasta = None):
             
         SeqIO.write(line, f"./each_IS/{name_i}.fasta", "fasta")
 
-def blastx(dir_in = None, 
+def run_blastx(dir_in = None, 
            num_threads = None, 
            num_descriptions = None, 
            db = None,
@@ -222,12 +222,12 @@ def main():
     #blastx
     if not get_args().x:
         print('2.blastx now..')
-        blastx(dir_in = './each_IS/',
-               num_threads = get_args().num_threads,
-               num_descriptions= get_args().num_descriptions,
-               db = get_args().database, 
-               threshold = get_args().threshold,
-               evalue = get_args().evalue )
+        run_blastx(dir_in = './each_IS/',
+                   num_threads = get_args().num_threads,
+                   num_descriptions= get_args().num_descriptions,
+                   db = get_args().database, 
+                   threshold = get_args().threshold,
+                   evalue = get_args().evalue )
 
 if __name__ == "__main__":
     main()
