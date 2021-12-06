@@ -1,6 +1,8 @@
 # ISblastx_DFAST.py
 **[DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")が出力するデータを継承して遺伝子間領域をblastxするスクリプト**
-
+- blastxする際のevalueは0.0001をデフォルトにしています。
+- 遺伝子間領域が1塩基であっても全てblastxします。（変更可能）
+- 
 ## Usage
 ```
 $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
@@ -8,10 +10,10 @@ $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
 ## 入出力と依存
 - 入力データ
   - DFASTが出力したgenome.fasta. (contig IDが'sequence~'の形で統一されているもの)
-  - DFASTが出力したfeatures.tsv. (遺伝子の開始点と終了点とその遺伝子が抽出されたcontig IDを使用)
+  - DFASTが出力したfeatures.tsv. (遺伝子の開始点と終了点とその遺伝子が抽出されたcontig IDを使用)  
 - 出力データ
   - 遺伝子間領域の塩基配列データ (-> interval_regions.fasta)
-  - 遺伝子間領域のblastxの結果
+  - 遺伝子間領域のblastxの結果　　
 - 依存
   - python 3.7
 
@@ -27,7 +29,7 @@ $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
 ![](./images/A_ver2.png)
 (0, 1) = (変更なし, 遺伝子領域を変更)  
 
-  ``comment=> 。``  
+  ``comment=> ``  
 
 - 遺伝子間領域における新遺伝子の探索について
   - 正解率(accuracy) : 96.57%  
