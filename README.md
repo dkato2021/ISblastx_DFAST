@@ -44,12 +44,11 @@ $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
 ```
   -h, --help            show this help message and exit
   -g GENOME             path to genome.fasta from DFAST. The contig ID is unified in the form of "sequence~"
-  -f FEATURES, --features FEATURES
-                        path to features.tsv from DFAST
+  -f FEATURES           path to features.tsv from DFAST
   -e EVALUE, --evalue EVALUE
                         evalue in blastx.(default:0.0001)
   -th THRESHOLD, --threshold THRESHOLD
-                        minimum length of IS sequence as input of blastx.(default:50)
+                        minimum length of interval sequence as input of blastx.(default:0)
   -db DATABASE, --database DATABASE
                         path to your nr database.(default:/home_ssd/local/db/blastdb.20200904/nr)
   -t NUM_THREADS, --num_threads NUM_THREADS
