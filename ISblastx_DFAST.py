@@ -12,8 +12,8 @@ def get_args():
     parser.add_argument('-f' , dest ='features', required=True,
                         help='path to features.tsv from DFAST') 
     
-    parser.add_argument('-e', '--evalue', type=float, default=.0001, 
-                       help='evalue in blastx.(default:0.0001)')
+    parser.add_argument('-e', '--evalue', type=float, default=.001, 
+                       help='evalue in blastx.(default:0.001)')
     parser.add_argument('-th', '--threshold', type=int, default=0, 
                        help='minimum length of interval sequence as input of blastx.(default:0)')
     
@@ -166,11 +166,13 @@ class MyGetIS(object):
             self.fasta_out += [SeqRecord(seq_out[j], 
                                          id=id_out[j], 
                                          description=id_out[j])]
+            
+        ids = [_.id for _ in self.genome]
+        ids_isCDS = list(self.df.sequence.drop_duplicates())
+        ids_noCDS = list(set(ids) - set(ids_isCDS))
+        self.fasta_out = self.fasta_out + [_ for _ in self.genome if _.id in ids_noCDS]
+        
         SeqIO.write(self.fasta_out, os.path.join(f'interval_regions.fasta'), "fasta")
-        print(f"======> Total length of interval_sequences.fasta:",
-              f"{round(sum(map(lambda x: len(x), seq_out))/1000)}kbp")
-        #print("======> Total length of interval_sequences.fasta:",
-        #      "{:,}bp".format(sum(map(lambda x: len(x), seq_out))))
         print( "======> Total length of duplicated CDS          :",
               round(self.dup_len/1000), "kbp")
         
@@ -185,7 +187,7 @@ def split_fasta(multifasta = None):
             
         SeqIO.write(line, f"./each_IS/{name_i}.fasta", "fasta")
 
-def run_blastx(dir_in = None, 
+def blastx(dir_in = None, 
            num_threads = None, 
            num_descriptions = None, 
            db = None,
@@ -222,12 +224,13 @@ def main():
     #blastx
     if not get_args().x:
         print('2.blastx now..')
-        run_blastx(dir_in = './each_IS/',
-                   num_threads = get_args().num_threads,
-                   num_descriptions= get_args().num_descriptions,
-                   db = get_args().database, 
-                   threshold = get_args().threshold,
-                   evalue = get_args().evalue )
+        blastx(dir_in = './each_IS/',
+               num_threads = get_args().num_threads,
+               num_descriptions= get_args().num_descriptions,
+               db = get_args().database, 
+               threshold = get_args().threshold,
+               evalue = get_args().evalue )
 
 if __name__ == "__main__":
     main()
+
