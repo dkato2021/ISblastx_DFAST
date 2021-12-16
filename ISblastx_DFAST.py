@@ -20,7 +20,7 @@ def get_args():
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
                        help='path to your nr database.(default:/home_ssd/local/db/blastdb.20200904/nr)')
-    parser.add_argument('-t' , '--num_threads', type=int, default=16,
+    parser.add_argument('-t' , '--num_threads', type=int, default=48,
                        help='num threads in blastx.(default:16)',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
                        help='num descriptions in blastx.(default:50)')
@@ -205,8 +205,8 @@ def blastx(dir_in = None,
         if len(fasta.seq) >= threshold:
             subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
                           ,shell=True)
-            #subprocess.run(f"diamond blastx --query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -threads {num_threads} --evalue {evalue} -db {db}"
-                          #,shell=True)
+            #subprocess.run(f"diamond blastx --query ./each_IS/{fasta_path} --out ./res_ISblastx/out_{fasta_path[:-6]}.txt -threads {num_threads} --evalue {evalue} -db {db}"
+             #             ,shell=True)
     
 def main():
     #load data
@@ -236,4 +236,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
