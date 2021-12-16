@@ -202,7 +202,9 @@ def blastx(dir_in = None,
     for fasta_path in tqdm(os.listdir(path=dir_in)):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) >= threshold:
-            subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
+            #subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
+                          ,shell=True)
+            subprocess.run(f"diamond blastx --query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -threads {num_threads} --evalue {evalue} -db {db}"
                           ,shell=True)
     
 def main():
@@ -223,7 +225,7 @@ def main():
     
     #blastx
     if not get_args().x:
-        print('2.blastx now..')
+        print('2.diamond blastx now..')
         blastx(dir_in = './each_IS/',
                num_threads = get_args().num_threads,
                num_descriptions= get_args().num_descriptions,
