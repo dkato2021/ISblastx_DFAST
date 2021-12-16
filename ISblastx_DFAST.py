@@ -174,7 +174,7 @@ class MyGetIS(object):
         
         SeqIO.write(self.fasta_out, os.path.join(f'interval_regions.fasta'), "fasta")
         print( "======> Total length of duplicated CDS          :",
-              round(self.dup_len/1000), "kbp")
+              self.dup_len, "bp")
         
 def split_fasta(multifasta = None):
     if 'each_IS' not in os.listdir(path='./'):
