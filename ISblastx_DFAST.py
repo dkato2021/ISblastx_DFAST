@@ -20,7 +20,7 @@ def get_args():
     
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
                        help='path to your nr database.(default:/home_ssd/local/db/blastdb.20200904/nr)')
-    parser.add_argument('-t' , '--num_threads', type=int, default=48,
+    parser.add_argument('-t' , '--num_threads', type=int, default=16,
                        help='num threads in blastx.(default:16)',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
                        help='num descriptions in blastx.(default:50)')
@@ -203,10 +203,10 @@ def blastx(dir_in = None,
     for fasta_path in tqdm(os.listdir(path=dir_in)):
         fasta = list(SeqIO.parse(f"./each_IS/{fasta_path}", "fasta"))[0]
         if len(fasta.seq) >= threshold:
-            #subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
+            subprocess.run(f"blastx -query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -num_threads {num_threads} -evalue {evalue} -num_descriptions {num_descriptions} -num_alignments 100 -db {db}"
                           ,shell=True)
-            subprocess.run(f"diamond blastx --query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -threads {num_threads} --evalue {evalue} -db {db}"
-                          ,shell=True)
+            #subprocess.run(f"diamond blastx --query ./each_IS/{fasta_path} -out ./res_ISblastx/out_{fasta_path[:-6]}.txt -threads {num_threads} --evalue {evalue} -db {db}"
+                          #,shell=True)
     
 def main():
     #load data
@@ -226,7 +226,7 @@ def main():
     
     #blastx
     if not get_args().x:
-        print('2.diamond blastx now..')
+        print('2.blastx now..')
         blastx(dir_in = './each_IS/',
                num_threads = get_args().num_threads,
                num_descriptions= get_args().num_descriptions,
