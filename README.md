@@ -1,4 +1,4 @@
-# ISblastx_DFAST.py (遺伝子間領域が数十kbpほど抽出されていない原因がわかりました！近日中に修正します！)
+# ISblastx_DFAST.py (遺伝子間領域が数十kbpほど抽出されていない原因がわかりました！おそらく完全に解決しています！)
 **[DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")が出力するデータを継承して遺伝子間領域をblastxするスクリプト**
 - blastxする際のevalueは0.0001をデフォルトにしています。
 - 遺伝子間領域が1塩基であっても全てblastxします。（変更可能）
@@ -64,8 +64,5 @@ $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
                         num descriptions in blastx.(default:50)
   -x {True,False}       If "True", blastx will not be executed.(default:False)
 ```
-
-## 補足事項
-- 遺伝子間領域が数十kbpほど抽出されていない可能性があるため原因が分かり次第プログラムを修正する予定
 
 
