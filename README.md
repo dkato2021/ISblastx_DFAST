@@ -13,7 +13,7 @@ $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
 ## 入出力と依存
 - 入力データ
   - DFASTが出力したgenome.fasta. (contig IDが'sequence~'の形で統一されているもの)
-  - DFASTが出力したfeatures.tsv. (遺伝子の開始点と終了点とその遺伝子をコードするcontig IDを使用)  
+  - DFASTが出力したfeatures.tsv. (遺伝子の開始点と終了点とcontig IDを使用)  
 - 出力データ
   - 遺伝子間領域の塩基配列データ (-> interval_regions.fasta)
   - 遺伝子間領域のblastxの結果　　
