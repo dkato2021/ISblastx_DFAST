@@ -4,7 +4,6 @@
 - 遺伝子間領域が1塩基であっても全てblastxします。（変更可能）
 - DFASTのCLIを組み込めばゲノムを入力データにしたISblastxにできる
 ```
-conda install dfast
 dfast --genome your_genome.fna
 ```
 - blastx -> diamondに変更予定
