@@ -6,7 +6,6 @@
 ```
 dfast --genome your_genome.fna
 ```
-- blastx -> diamondに変更予定
 ## Usage
 ```
 $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
