@@ -63,5 +63,5 @@ $ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
   -x {True,False}       If "True", blastx will not be executed.(default:False)
 ```
 ## 注意
-遺伝子間領域が数kbpほど抽出できていない可能性あり
+数kbpほどの遺伝子間領域を抽出できていない可能性あり
 
