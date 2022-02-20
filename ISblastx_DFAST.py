@@ -21,7 +21,7 @@ def get_args():
     parser.add_argument('-db', '--database', default='/home_ssd/local/db/blastdb.20200904/nr', 
                        help='path to your nr database.(default:/home_ssd/local/db/blastdb.20200904/nr)')
     parser.add_argument('-t' , '--num_threads', type=int, default=48,
-                       help='num threads in blastx.(default:16)',) 
+                       help='num threads in blastx.(default:48)',) 
     parser.add_argument('-nd', '--num_descriptions', type=int, default=50,
                        help='num descriptions in blastx.(default:50)')
     
