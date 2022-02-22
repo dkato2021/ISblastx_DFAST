@@ -65,7 +65,7 @@ class MyGetIS(object):
     def judge_normal_interval(cds_h, cds_i):
         return max(int(cds_h.start), int(cds_h.end)) < min(int(cds_i.start), int(cds_i.end))
     
-    @classmethod
+    @classmethod #@staticmethodの方が適切かもしれない
     def get_1st_interval(cls, cds_i, 
                          genome_i, 
                          id_out  = None, 
