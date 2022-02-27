@@ -33,10 +33,10 @@ def get_args():
 
 
 def run_dfast(genome = None):
-    subprocess.run(f"dfast -g {genome} --cpu {get_args().num_threads_dfast}", shell=True)
+    subprocess.run(f"dfast -g {genome} -o res_DFAST --cpu {get_args().num_threads_dfast}", shell=True)
 
     c= ['sequence', 'start', 'end']
-    _df = pd.read_table('./OUT/genome.gff', header=1, usecols=[0,3, 4]).dropna()
+    _df = pd.read_table('./res_DFAST/genome.gff', header=1, usecols=[0,3, 4]).dropna()
     _ = pd.DataFrame(_df.columns,index = c).T
     _df.columns = c
     return pd.concat([_,_df]).reset_index(drop=True)
@@ -225,7 +225,7 @@ def main():
     if get_args().genome is not None and get_args().features is None:
         #load data
         df = run_dfast(genome = get_args().genome)
-        genome = list(SeqIO.parse('./OUT/genome.fna', "fasta"))
+        genome = list(SeqIO.parse('./res_DFAST/genome.fna', "fasta"))
     
     elif get_args().genome is not None and get_args().features is not None:
         #load data
@@ -255,3 +255,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+   
