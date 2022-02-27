@@ -1,5 +1,5 @@
 # blastxis
-
+[]!(./images/blastxis.png)
 ## Installation
 ```
 $ git clone https://github.com/dkato2021/blastxis.git
