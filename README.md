@@ -41,3 +41,4 @@ optional arguments:
   -x {True,False}       If "True", blastx will not be executed.(default:False)
 ```
 
+## Advanced analysis
