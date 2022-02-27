@@ -1,4 +1,4 @@
-# blastxis.py
+# BlastXis
 
 ## Installation
 ```
