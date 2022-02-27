@@ -1,14 +1,10 @@
-# blastxis_DFAST.py
+# blastxis.py
 **[DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")が出力するデータを継承して遺伝子間領域をblastxするスクリプト**
-- blastxする際のevalueは0.001をデフォルトにしています。
-- 遺伝子間領域が1塩基であっても全てblastxします。（変更可能）
-- DFASTのCLIを組み込めばゲノムを入力データにしたISblastxにできる
-```
-dfast --genome your_genome.fna
-```
+
 ## Usage
 ```
-$ python3 ISblastx_DFAST.py -g genome.fna -f featues.tsv
+$ blastxis.py -g genome.fna
+$ blastxis.py -g genome.fna -f featues.tsv
 ```
 ## 入出力と依存
 - 入力データ
