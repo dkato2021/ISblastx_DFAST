@@ -1,4 +1,4 @@
-# BlastXis
+# blastxis
 
 ## Installation
 ```
