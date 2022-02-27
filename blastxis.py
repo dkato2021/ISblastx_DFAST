@@ -9,9 +9,9 @@ from Bio.SeqRecord import SeqRecord
 def get_args():
     parser = argparse.ArgumentParser(description='dkato. November, 2021') 
     parser.add_argument('-g' , dest ='genome', required=True,
-                        help='path to your genome.fasta. If you will omit DFAST, the contig ID is unified in the form of "sequence~"') 
+                        help='specify the path to your genome.fasta. If you will omit DFAST, the contig ID is unified in the form of "sequence~"') 
     parser.add_argument('-f' , dest ='features',
-                        help='path to your features.tsv from DFAST.') 
+                        help='specify the path to your features.tsv from DFAST.') 
     
     parser.add_argument('-e', '--evalue', type=float, default=.001, 
                        help='evalue in blastx.(default:0.001)')
@@ -200,7 +200,7 @@ def split_fasta(multifasta = None):
             
         SeqIO.write(line, f"./each_IS/{name_i}.fasta", "fasta")
 
-def blastx(dir_in = None, 
+def run_blastx(dir_in = None, 
            num_threads = None, 
            num_descriptions = None, 
            db = None,
@@ -246,7 +246,7 @@ def main():
     #blastx
     if not get_args().x:
         print('2.blastx now..')
-        blastx(dir_in = './each_IS/',
+        run_blastx(dir_in = './each_IS/',
                num_threads = get_args().num_threads,
                num_descriptions= get_args().num_descriptions,
                db = get_args().database, 
