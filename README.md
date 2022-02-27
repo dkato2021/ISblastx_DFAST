@@ -1,4 +1,7 @@
 # blastxis
+**dependency**
+- [DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")
+- [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&BLAST_SPEC=&LINK_LOC=blasttab&LAST_PAGE=blastp)
 ![](./images/blastxis.png)
 ## Installation
 ```
@@ -35,4 +38,4 @@ optional arguments:
                         num descriptions in blastx.(default:50)
   -x {True,False}       If "True", blastx will not be executed.(default:False)
 ```
-[DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")
+
