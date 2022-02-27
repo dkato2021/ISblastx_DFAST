@@ -9,9 +9,9 @@ from Bio.SeqRecord import SeqRecord
 def get_args():
     parser = argparse.ArgumentParser(description='dkato. November, 2021') 
     parser.add_argument('-g' , dest ='genome', required=True,
-                        help='path to genome.fasta from DFAST. The contig ID is unified in the form of "sequence~", with features-option') 
+                        help='path to your genome.fasta. If you will omit DFAST, the contig ID is unified in the form of "sequence~"') 
     parser.add_argument('-f' , dest ='features',
-                        help='path to features.tsv from DFAST.') 
+                        help='path to your features.tsv from DFAST.') 
     
     parser.add_argument('-e', '--evalue', type=float, default=.001, 
                        help='evalue in blastx.(default:0.001)')
@@ -256,5 +256,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-   
