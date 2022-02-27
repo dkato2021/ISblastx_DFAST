@@ -1,8 +1,10 @@
 # blastxis
-**dependency**
+
+![](./images/blastxis.png)
+
+### dependency
 - [DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")
 - [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&BLAST_SPEC=&LINK_LOC=blasttab&LAST_PAGE=blastp)
-![](./images/blastxis.png)
 ## Installation
 ```
 $ git clone https://github.com/dkato2021/blastxis.git
