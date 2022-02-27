@@ -9,8 +9,9 @@ $ chmod u+x blastxis.py
 ```
 $ blastxis.py -g genome.fna
 
-#if you omit [DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")
+#if you omit DFAST
 $ blastxis.py -g genome.fna -f featues.tsv
 ```
 
 
+[DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")
