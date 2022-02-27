@@ -1,6 +1,6 @@
 # blastxis
 
-![](./images/blastxis.png)
+![](./images/blastxisver2.png)
 
 ## dependency
 - [DFAST](https://dfast.ddbj.nig.ac.jp "DFAST Home")
