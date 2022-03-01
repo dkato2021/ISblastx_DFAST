@@ -41,5 +41,5 @@ optional arguments:
   -x {True,False}       If "True", blastx will not be executed.(default:False)
 ```
 
-## Advanced analysis
+## contig-edge analysis with this script
 coming soon..
