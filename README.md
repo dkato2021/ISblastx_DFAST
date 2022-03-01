@@ -42,4 +42,4 @@ optional arguments:
 ```
 
 ## contig-edge analysis with this script
-coming soon..
+![](./images/edge.png)
