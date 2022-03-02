@@ -43,3 +43,5 @@ optional arguments:
 
 ## contig-edge analysis with this script
 ![](./images/edge.png)
+## tips
+[Batch Entrez](https://www.ncbi.nlm.nih.gov/sites/batchentrez)
