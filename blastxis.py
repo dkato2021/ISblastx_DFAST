@@ -186,19 +186,20 @@ class MyGetIS(object):
         self.fasta_out = self.fasta_out + [_ for _ in self.genome if _.id in ids_noCDS]
         
         SeqIO.write(self.fasta_out, os.path.join(f'interval_regions.fasta'), "fasta")
+        subprocess.run(f"seqkit grep -nrvp interval_region interval_regions.fasta > edge.fasta" ,shell=True)
         print( "======> Total length of duplicated CDS          :",
               self.dup_len, "bp")
         
-def split_fasta(multifasta = None):
-    if 'each_IS' not in os.listdir(path='./'):
-        os.system('mkdir each_IS')
+def split_fasta(multifasta = None, tag = None):
+    if f'each_{tag}' not in os.listdir(path='./'):
+        os.system(f'mkdir each_{tag}')
     
     for line in list(SeqIO.parse(multifasta, "fasta")):
         name_i = line.description
         if " " in name_i or "/" in name_i:
             name_i = name_i.replace(" ", "_").replace("/", "_")
             
-        SeqIO.write(line, f"./each_IS/{name_i}.fasta", "fasta")
+        SeqIO.write(line, f"./each_{tag}/{name_i}.fasta", "fasta")
 
 def run_blastx(dir_in = None, 
            num_threads = None, 
@@ -241,7 +242,8 @@ def main():
                        genome = genome)
     seq_out, id_out = instance.get_IS()
     instance.main(seq_out, id_out)
-    split_fasta(multifasta ='./interval_regions.fasta')
+    split_fasta(multifasta ='./interval_regions.fasta', tag = 'IS')
+    split_fasta(multifasta ='./edge.fasta', tag = 'edge')
     
     #blastx
     if not get_args().x:
@@ -255,4 +257,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
